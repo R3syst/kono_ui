@@ -7,6 +7,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -285,8 +286,11 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
         ],
       ),
       'textOnPageLoadAnimation7': AnimationInfo(
+        loop: true,
         trigger: AnimationTrigger.onPageLoad,
+        applyInitialState: true,
         effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
           FadeEffect(
             curve: Curves.easeInOut,
             delay: 0.0.ms,
@@ -299,6 +303,20 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
             delay: 0.0.ms,
             duration: 600.0.ms,
             begin: Offset(0.0, 70.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'textOnActionTriggerAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onActionTrigger,
+        applyInitialState: true,
+        effectsBuilder: () => [
+          VisibilityEffect(duration: 1.ms),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 0.0),
             end: Offset(0.0, 0.0),
           ),
         ],
@@ -633,28 +651,34 @@ class _OnboardingWidgetState extends State<OnboardingWidget>
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AnimatedDefaultTextStyle(
+                              SelectionArea(
+                                      child: AutoSizeText(
+                                'Deploy exploits with teams',
                                 style: FlutterFlowTheme.of(context)
                                     .headlineMedium
                                     .override(
                                       fontFamily: 'Sora',
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
                                       fontSize: 29,
                                       letterSpacing: 0,
                                       fontWeight: FontWeight.bold,
                                     ),
-                                duration: Duration(milliseconds: 495),
-                                curve: Curves.bounceOut,
-                                child: Text(
-                                  'Deploy exploits with teams',
-                                ),
-                              ).animateOnPageLoad(
-                                  animationsMap['textOnPageLoadAnimation7']!),
+                              ))
+                                  .animateOnPageLoad(animationsMap[
+                                      'textOnPageLoadAnimation7']!)
+                                  .animateOnActionTrigger(
+                                    animationsMap[
+                                        'textOnActionTriggerAnimation']!,
+                                  ),
                               Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 44, 0, 0),
                                 child: FFButtonWidget(
-                                  onPressed: () {
-                                    print('Button pressed ...');
+                                  onPressed: () async {
+                                    // start
+
+                                    context.pushNamed('HomePage');
                                   },
                                   text: 'Get Started',
                                   options: FFButtonOptions(

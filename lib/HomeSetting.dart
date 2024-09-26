@@ -1,8 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import 'home_setting_model.dart';
 export 'home_setting_model.dart';
@@ -24,7 +25,7 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
     super.initState();
     _model = createModel(context, () => HomeSettingModel());
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -47,7 +48,7 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
           style: FlutterFlowTheme.of(context).displaySmall.override(
                 fontFamily: 'Sora',
                 color: FlutterFlowTheme.of(context).primaryText,
-                letterSpacing: 0,
+                letterSpacing: 0.0,
               ),
         ),
         actions: [
@@ -73,10 +74,8 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                   ),
-                  child: CachedNetworkImage(
-                    fadeInDuration: Duration(milliseconds: 500),
-                    fadeOutDuration: Duration(milliseconds: 500),
-                    imageUrl: 'https://picsum.photos/seed/934/600',
+                  child: Image.asset(
+                    'assets/images/logo.png',
                     fit: BoxFit.fitWidth,
                   ),
                 ),
@@ -99,22 +98,22 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text(
-                    'Casper Ghost',
+                    'APT38',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           color: FlutterFlowTheme.of(context).primary,
-                          letterSpacing: 0,
+                          letterSpacing: 0.0,
                           fontWeight: FontWeight.bold,
                         ),
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(4, 0, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(14, 0, 0, 0),
                     child: Text(
-                      'casper@ghustbusters.com',
+                      'havoc@lazurus.eth',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
                             color: FlutterFlowTheme.of(context).primaryText,
-                            letterSpacing: 0,
+                            letterSpacing: 0.0,
                           ),
                     ),
                   ),
@@ -141,10 +140,10 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 12),
                   child: Text(
-                    'My Account Information',
+                    'Profile Setup',
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Inter',
-                          letterSpacing: 0,
+                          letterSpacing: 0.0,
                         ),
                   ),
                 ),
@@ -179,21 +178,39 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Change Password',
+                            'Logon Pin',
                             style:
                                 FlutterFlowTheme.of(context).bodyLarge.override(
                                       fontFamily: 'Inter',
-                                      letterSpacing: 0,
+                                      letterSpacing: 0.0,
                                     ),
                           ),
                           Expanded(
                             child: Align(
                               alignment: AlignmentDirectional(1, 0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20,
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'pinAuth',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.leftToRight,
+                                      ),
+                                    },
+                                  );
+                                },
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),
@@ -236,24 +253,33 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
-                                'Edit Profile',
+                                'Edit Local Profile',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
                                       fontFamily: 'Inter',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      letterSpacing: 0,
+                                      letterSpacing: 0.0,
                                     ),
                               ),
                               Expanded(
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 20,
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed('localProfile');
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -286,11 +312,128 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(16, 12, 0, 12),
                   child: Text(
-                    'Support',
+                    'More',
                     style: FlutterFlowTheme.of(context).labelMedium.override(
                           fontFamily: 'Inter',
-                          letterSpacing: 0,
+                          letterSpacing: 0.0,
                         ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+              child: Container(
+                width: double.infinity,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 0,
+                      color: FlutterFlowTheme.of(context).alternate,
+                      offset: Offset(
+                        0,
+                        1,
+                      ),
+                    )
+                  ],
+                  shape: BoxShape.rectangle,
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'Invite Teams',
+                            style:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: AlignmentDirectional(1, 0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed('inviteTeamProfile');
+                                },
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
+              child: Container(
+                width: double.infinity,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  boxShadow: [
+                    BoxShadow(
+                      blurRadius: 0,
+                      color: FlutterFlowTheme.of(context).alternate,
+                      offset: Offset(
+                        0,
+                        1,
+                      ),
+                    )
+                  ],
+                  shape: BoxShape.rectangle,
+                ),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'Terminal Preferences',
+                            style:
+                                FlutterFlowTheme.of(context).bodyLarge.override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                          ),
+                          Expanded(
+                            child: Align(
+                              alignment: AlignmentDirectional(1, 0),
+                              child: Icon(
+                                Icons.arrow_forward_ios,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -327,24 +470,33 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
-                                'Tutorial',
+                                'Docs',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
                                     .override(
                                       fontFamily: 'Inter',
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
-                                      letterSpacing: 0,
+                                      letterSpacing: 0.0,
                                     ),
                               ),
                               Expanded(
                                 child: Align(
                                   alignment: AlignmentDirectional(1, 0),
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    size: 20,
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      context.pushNamed('docs');
+                                    },
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -386,78 +538,33 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Text(
-                            'Submit a Bug',
+                            'Submit a Feature/Bug Request',
                             style: FlutterFlowTheme.of(context)
                                 .bodyLarge
                                 .override(
                                   fontFamily: 'Inter',
                                   color:
                                       FlutterFlowTheme.of(context).primaryText,
-                                  letterSpacing: 0,
+                                  letterSpacing: 0.0,
                                 ),
                           ),
                           Expanded(
                             child: Align(
                               alignment: AlignmentDirectional(1, 0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 1),
-              child: Container(
-                width: double.infinity,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryBackground,
-                  boxShadow: [
-                    BoxShadow(
-                      blurRadius: 0,
-                      color: FlutterFlowTheme.of(context).alternate,
-                      offset: Offset(
-                        0,
-                        1,
-                      ),
-                    )
-                  ],
-                  shape: BoxShape.rectangle,
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Submit a Feature Request',
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0,
-                                    ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(1, 0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color:
-                                    FlutterFlowTheme.of(context).secondaryText,
-                                size: 20,
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed('bug');
+                                },
+                                child: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 20,
+                                ),
                               ),
                             ),
                           ),
@@ -504,8 +611,7 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                                       Brightness.light
                                   ? FlutterFlowTheme.of(context)
                                       .secondaryBackground
-                                  : FlutterFlowTheme.of(context)
-                                      .primaryBackground,
+                                  : FlutterFlowTheme.of(context).primaryText,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
                                 color: Theme.of(context).brightness ==
@@ -544,7 +650,7 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                                                   .primaryText
                                               : FlutterFlowTheme.of(context)
                                                   .secondaryText,
-                                          letterSpacing: 0,
+                                          letterSpacing: 0.0,
                                         ),
                                   ),
                                 ),
@@ -610,7 +716,7 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                                                   .primaryText
                                               : FlutterFlowTheme.of(context)
                                                   .secondaryText,
-                                          letterSpacing: 0,
+                                          letterSpacing: 0.0,
                                         ),
                                   ),
                                 ),
@@ -630,9 +736,39 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 12, 0),
+                    child: FFButtonWidget(
+                      onPressed: () {
+                        print('Button pressed ...');
+                      },
+                      text: 'Stop Nodes',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 50,
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        textStyle: FlutterFlowTheme.of(context)
+                            .titleSmall
+                            .override(
+                              fontFamily: 'Inter',
+                              color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                        elevation: 0,
+                        borderSide: BorderSide(
+                          color: FlutterFlowTheme.of(context).alternate,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('Onboarding');
                     },
                     text: 'Log Out',
                     options: FFButtonOptions(
@@ -646,7 +782,7 @@ class _HomeSettingWidgetState extends State<HomeSettingWidget> {
                           .override(
                             fontFamily: 'Inter',
                             color: FlutterFlowTheme.of(context).secondaryText,
-                            letterSpacing: 0,
+                            letterSpacing: 0.0,
                             fontWeight: FontWeight.w500,
                           ),
                       elevation: 0,
